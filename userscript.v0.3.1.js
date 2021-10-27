@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google Drive Picker Fix
 // @namespace    https://zanestjohn.com/
-// @version      0.3.0
+// @version      0.3.1
 // @description  Fix Google Drive picker on PowerSchool Learning
 // @author       Zane St. John
 // @match        https://*.learning.powerschool.com/*
@@ -15,11 +15,17 @@
   // will hold a reference to the newly created
   // google drive upload button
   var NEW_DRIVE_BUTTON;
+  // will hold a reference to the check interval
+  // that stops loading visual when the picker
+  // window is closed
+  var PICKER_WINDOW_CLOSE_CHECK_INTERVAL;
 
   window.addEventListener("message", function (message) {
     if (message.data.drivePickerData) {
       // hide loading spinner
       hideLoadingSpinner(NEW_DRIVE_BUTTON);
+      // clear picker window check interval
+      clearInterval(PICKER_WINDOW_CLOSE_CHECK_INTERVAL);
 
       // data from drive picker
       var data = message.data.drivePickerData;
@@ -107,13 +113,16 @@
     );
     pickerWin.addEventListener("load", function () {
       pickerWin.document.documentElement.innerHTML = generatePickerHtml(token);
-      pickerWin.document.title = "Google Drive Picker";
+      pickerWin.document.title = "Attach from Google Drive";
     });
 
-    // // stop loading on close
-    // pickerWin.addEventListener("beforeunload", function () {
-    //   hideLoadingSpinner(NEW_DRIVE_BUTTON);
-    // });
+    // stop loading on close
+    PICKER_WINDOW_CLOSE_CHECK_INTERVAL = setInterval(() => {
+      if (pickerWin.closed) {
+        hideLoadingSpinner(NEW_DRIVE_BUTTON);
+        clearInterval(PICKER_WINDOW_CLOSE_CHECK_INTERVAL);
+      }
+    }, 500);
   }
 
   async function getOauthToken(url) {

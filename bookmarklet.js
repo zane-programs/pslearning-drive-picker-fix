@@ -10,7 +10,7 @@
     } else {
         const pickerScript = document.createElement("SCRIPT");
         pickerScript.id = "zaneFix";
-        pickerScript.src = "https://cdn.jsdelivr.net/gh/zane-programs/pslearning-drive-picker-fix@e8cfd92bbdee232f7f1b99d9ef541dd9c998d897/fix.v0.2.1.min.js";
+        pickerScript.src = "https://cdn.jsdelivr.net/gh/zane-programs/pslearning-drive-picker-fix@de409ccff0c50261c3231843bfff1168140dfdae/fix.v0.2.2.min.js";
         pickerScript.onload = () => openPickerWindow();
         document.head.appendChild(pickerScript);
     }

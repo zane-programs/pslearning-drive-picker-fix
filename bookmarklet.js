@@ -1,9 +1,3 @@
-// ==ClosureCompiler==
-// @compilation_level SIMPLE_OPTIMIZATIONS
-// @output_file_name default.js
-// ==/ClosureCompiler==
-
-// ADD YOUR CODE HERE
 (function(document) {
     if (document.querySelector("#zaneFix")) {
         openPickerWindow();

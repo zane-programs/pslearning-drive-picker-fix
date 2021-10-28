@@ -1,3 +1,5 @@
+// v0.2.3
+
 "use strict";
 
 (function (window) {
@@ -7,7 +9,8 @@
 
       if (data.action == google.picker.Action.PICKED) {
         // show gdrive table
-        tbGoogleDriveElements.each(Element.show);
+        Element.show("tb_google_drive_stub");
+        
         var docs = jQuery('#google_drive_files_list').data('google-drive-document-data');
         var new_docs = [];
         if (docs === undefined) docs = [];
@@ -23,9 +26,6 @@
         });
         present_selected_files(new_docs);
         jQuery('#google_drive_files_list').data('google-drive-document-data', docs);
-      } else {
-        // show gdrive table
-        tbGoogleDriveElements.each(Element.hide);
       }
     }
   });
@@ -77,7 +77,7 @@
     return `<style>body{overflow:hidden}.picker-dialog{width:100%!important;height:100%!important;top:0!important;left:0!important}.picker-dialog-content{width:100%!important;height:100%!important}</style><div style="display: none;" id="pickerScript">var googleapis=document.createElement("script");googleapis.src="https://apis.google.com/js/api.js?onload=loadPicker";document.head.appendChild(googleapis);window.developerKey="AIzaSyAIp-SKWaTDGWQxUAMmZw6rU4JYB5NGXE8";window.clientId="1234567890-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com";window.appId="1234567890";window.scope=["https://www.googleapis.com/auth/drive.file"];window.pickerApiLoaded=!1;window.oauthToken="${oauthToken}";window.loadPicker=function(){gapi.load("picker",{callback:onPickerApiLoad})};
 window.onPickerApiLoad=function(){pickerApiLoaded=!0;createPicker()};window.createPicker=function(){pickerApiLoaded&&oauthToken&&((new google.picker.View(google.picker.ViewId.DOCS)).setMimeTypes("image/png,image/jpeg,image/jpg"),(new google.picker.PickerBuilder).enableFeature(google.picker.Feature.NAV_HIDDEN).enableFeature(google.picker.Feature.MULTISELECT_ENABLED).setOAuthToken(oauthToken).setDeveloperKey(window.developerKey).addView((new google.picker.DocsView).setIncludeFolders(!1).setMode(google.picker.DocsViewMode.LIST)).addView((new google.picker.DocsUploadView).setIncludeFolders(!0)).setCallback(pickerCallback).enableFeature(google.picker.Feature.SUPPORT_DRIVES).enableFeature(google.picker.Feature.MULTISELECT_ENABLED).build().setVisible(!0))};
 window.pickerCallback=function(a){a.action==google.picker.Action.PICKED?(window.opener.postMessage({drivePickerData:a},window.location.protocol+"//"+window.location.host),window.close()):a.action==google.picker.Action.CANCEL&&window.close()};</div><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="eval(document.getElementById('pickerScript').innerText);document.getElementById('pickerScript').remove();this.remove();"/>`;
-  }; // run openPickerWindow
+  };
 
 
   window.openPickerWindow = function () {

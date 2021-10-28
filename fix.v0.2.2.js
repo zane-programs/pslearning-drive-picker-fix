@@ -42,7 +42,7 @@
     }).then(function (_resp) {
       const token = _resp;
       let pickerWin = window.open("https://windward.learning.powerschool.com/images/picker", null, "width=800,height=600");
-      pickerWin.window.addEventListener("load", function () {
+      pickerWin.addEventListener("load", function () {
         pickerWin.document.documentElement.innerHTML = generatePickerHtml(token);
         pickerWin.document.title = "Google Drive Picker";
       });

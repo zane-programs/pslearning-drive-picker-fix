@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google Drive Picker Fix
 // @namespace    https://zanestjohn.com/
-// @version      0.4.1
+// @version      0.4.2
 // @description  Fix Google Drive picker on PowerSchool Learning
 // @author       Zane St. John
 // @match        https://*.learning.powerschool.com/*
@@ -84,7 +84,10 @@
         driveButton.classList.add("sbutton", "bdoc"); // sbutton appearance with docs icon
         driveButton.addEventListener("click", () => {
           showLoadingSpinner(driveButton);
-          openPickerWindow().catch((error) => {
+          openPickerWindow(
+            // write page url
+            document.querySelector("#TB_ajaxContent").getAttribute("tburl")
+          ).catch((error) => {
             hideLoadingSpinner(driveButton); // stop loading symbol on error
             showErrorDialog(error); // user error dialog
           });

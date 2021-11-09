@@ -3,13 +3,13 @@
  *
  * @file A workaround for Google Drive submissions in PowerSchool Learning
  * @author Zane St. John <zstjohn22@windwardschool.org>
- * @version 0.4.0
+ * @version 0.4.1
  */
 
 (function (window, $) {
   "use strict";
 
-  window._DRIVE_FIX_VERSION = "0.4.0"; // Version number
+  window._DRIVE_FIX_VERSION = "0.4.1"; // Version number
 
   /**
    * Opens the Google Drive picker for a given hand-in/write page

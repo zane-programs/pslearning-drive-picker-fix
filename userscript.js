@@ -14,7 +14,7 @@
 
   // url for fix script
   const FIX_SCRIPT_URL =
-    "https://cdn.jsdelivr.net/gh/zane-programs/pslearning-drive-picker-fix@latest/fix-core.min.js";
+    "https://cdn.jsdelivr.net/gh/zane-programs/pslearning-drive-picker-fix@5ecdbb6efe6cb0033734ece4e71f573edeaf1ee0/fix-core.min.js";
 
   // will hold a reference to the newly created
   // google drive upload button

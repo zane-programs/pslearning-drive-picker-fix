@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google Drive Picker Fix
 // @namespace    https://zanestjohn.com/
-// @version      0.4.0
+// @version      0.4.1
 // @description  Fix Google Drive picker on PowerSchool Learning
 // @author       Zane St. John
 // @match        https://*.learning.powerschool.com/*
@@ -45,6 +45,27 @@
       // replace spinner with icon
       spinner.parentNode.replaceChild(icon, spinner);
     }
+  }
+
+  // thanks to https://stackoverflow.com/a/29754070
+  function waitForElementToDisplay(
+    selector,
+    callback,
+    checkFrequencyInMs,
+    timeoutInMs
+  ) {
+    var startTimeInMs = Date.now();
+    (function loopSearch() {
+      if (document.querySelector(selector) != null) {
+        callback();
+        return;
+      } else {
+        setTimeout(function () {
+          if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs) return;
+          loopSearch();
+        }, checkFrequencyInMs);
+      }
+    })();
   }
 
   function initPickerFix() {
@@ -96,7 +117,9 @@
     const script = document.createElement("script");
     script.src = FIX_SCRIPT_URL;
     // add fixed button on load
-    script.onLoad = initPickerFix;
+    script.onload = initPickerFix;
+    // add script to head
+    document.head.appendChild(script);
   }
 
   // load fix
